@@ -1,0 +1,44 @@
+<%= form_with(model: obituary, local: true) do |form| %>
+  <% if obituary.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(obituary.errors.count, "error") %> prohibited this obituary from being saved:</h2>
+
+      <ul>
+      <% obituary.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :obituary_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :birth_date %>
+    <%= form.datetime_select :birth_date, id: :obituary_birth_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :death_date %>
+    <%= form.datetime_select :death_date, id: :obituary_death_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, id: :obituary_content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :images %>
+    <%= form.fields_for :images do |b| %>
+        <%= form.file_field :image %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
