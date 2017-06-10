@@ -4,7 +4,11 @@ class ObituariesController < ApplicationController
   # GET /obituaries
   # GET /obituaries.json
   def index
-    @obituaries = Obituary.all
+    @obituaries = Obituary.all.order('created_at DESC')
+
+    if params[:search]
+      @obituaries = Obituary.search(params[:search]).order("created_at DESC")
+    end
   end
 
   # GET /obituaries/1
@@ -15,7 +19,7 @@ class ObituariesController < ApplicationController
   # GET /obituaries/new
   def new
     @obituary = Obituary.new
-    @obituary.images.build
+    @obituary.obituary_images.build
   end
 
   # GET /obituaries/1/edit
@@ -70,6 +74,6 @@ class ObituariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def obituary_params
-      params.require(:obituary).permit(:name, :birth_date, :death_date, :content, :obituaryimage)
+      params.require(:obituary).permit(:name, :birth_date, :death_date, :content, obituary_images_attributes: [ :_destroy, :id, :image] )
     end
 end

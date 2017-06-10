@@ -1,4 +1,4 @@
-<%= form_with(model: obituary, local: true) do |form| %>
+<%= form_with(model: obituary, local: true, html: { multipart: true }) do |form| %>
   <% if obituary.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(obituary.errors.count, "error") %> prohibited this obituary from being saved:</h2>
@@ -33,8 +33,8 @@
 
   <div class="field">
     <%= form.label :images %>
-    <%= form.fields_for :images do |b| %>
-        <%= form.file_field :image %>
+    <%= form.fields_for :obituary_images do |b| %>
+      <%= b.file_field :image %>
     <% end %>
   </div>
 

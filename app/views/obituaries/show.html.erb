@@ -6,6 +6,12 @@
 </p>
 
 <p>
+  <% @obituary.obituary_images.each do |i| %>
+    <%= image_tag i.image.url %>
+  <% end %>
+</p>
+
+<p>
   <strong>Birth date:</strong>
   <%= @obituary.birth_date %>
 </p>

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :obituaries
   devise_for :users
-  root to: "application#index"
+  root to: "obituaries#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :obituaries
 end
