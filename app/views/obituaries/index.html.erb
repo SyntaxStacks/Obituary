@@ -17,7 +17,9 @@
         <span class="glyphicon glyphicon-time"></span> Deceased: <%= obituary.death_date %>
       </p>
       <hr>
-      <%= image_tag obituary.obituary_images[0].image.url(:medium), class: "img-responsive" %>
+      <% if obituary.obituary_images[0] %>
+          <%= image_tag obituary.obituary_images[0].image.url(:medium), class: "img-responsive" %>
+      <% end %>
       <hr>
       <p><%= obituary.content %></p>
       <%= link_to obituary_path(obituary), class: "btn btn-primary" do %>

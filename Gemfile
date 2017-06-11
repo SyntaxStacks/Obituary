@@ -36,6 +36,9 @@ gem 'jbuilder', '~> 2.5'
 # Authentication
 gem 'devise'
 
+# Comments
+gem 'acts_as_commentable'
+
 # Attachments
 gem 'paperclip', '~> 5.0.0'
 
