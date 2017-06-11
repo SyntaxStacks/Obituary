@@ -2,19 +2,181 @@
 <html>
   <head>
     <title>Obit</title>
+  </head>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Obituaries</title>
+
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
 
-  <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= form_tag(obituaries_path, :method => "get", id: "search-form") do %>
-      <%= text_field_tag :search, params[:search], placeholder: "Search Obituaries" %>
-      <%= submit_tag "Search" %>
-    <% end %>
-    <%= yield %>
-  </body>
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/css/blog-home.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <%= link_to "Obituaries", root_path, class: "navbar-brand" %>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <%= link_to "About" %>
+                    </li>
+                    <li>
+                        <%= link_to "Services" %>
+                    </li>
+                    <li>
+                        <%= link_to "Contact" %>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav pull-right">
+                    <li>
+                        <% if user_signed_in? %>
+                            <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+                        <% else %>
+                            <%= link_to "Login", new_user_session_path %>
+                        <% end %>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <div class="container">
+        <!-- Page Content -->
+        <p id="notice" class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+
+        <div class="row">
+
+            <div class="col-md-8">
+              <%= yield %>
+            </div>
+
+            <!-- Sidebar Widgets Column -->
+            <div class="col-md-4">
+
+                <!-- Search Well -->
+                <div class="well">
+                    <h4>Obituary Search</h4>
+                    <div class="input-group">
+                        <%= form_tag(obituaries_path, :method => "get", id: "search-form") do %>
+                            <span class="input-group-btn">
+                                <%= text_field_tag :search, params[:search], placeholder: "Search Obituaries", class: "form-control" %>
+                                <%= button_tag(type: "submit", class: "btn btn-default") do %>
+                                  <span class="glyphicon glyphicon-search"></span>
+                                <% end %>
+                            </span>
+                        <% end %>
+                    </div>
+                    <!-- /.input-group -->
+                </div>
+
+                <!-- Categories Well -->
+                <div class="well">
+                    <h4>Send Love</h4>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled">
+                                <li><a href="#">Flowers</a>
+                                </li>
+                                <li><a href="#">Cards</a>
+                                </li>
+                                <li><a href="#">Money</a>
+                                </li>
+                                <li><a href="#">Food</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.col-lg-6 -->
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled">
+                                <li><a href="#">Candy</a>
+                                </li>
+                                <li><a href="#">Gift Cards</a>
+                                </li>
+                                <li><a href="#">E-Cards</a>
+                                </li>
+                                <li><a href="#">More</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.col-lg-6 -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+
+                <!-- Side Widget Well -->
+                <div class="well">
+                    <h4>Share Love and Tenderness</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Obituaries 2017</p>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+
+</body>
+
 </html>

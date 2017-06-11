@@ -34,7 +34,10 @@
   <div class="field">
     <%= form.label :images %>
     <%= form.fields_for :obituary_images do |b| %>
-      <%= b.file_field :image %>
+      <span>
+          <%= image_tag obituary.obituary_images[b.index].image.url(:thumb) if controller.action_name == 'edit' %>
+          <%= b.file_field :image %>
+      </span>
     <% end %>
   </div>
 

@@ -1,4 +1,5 @@
 class Obituary < ApplicationRecord
+  belongs_to :user
   has_many :obituary_images
   accepts_nested_attributes_for :obituary_images
 

@@ -1,6 +1,7 @@
 class ObituariesController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_obituary, only: [:show, :edit, :update, :destroy]
-
+  before_action :redirect_bad_user, only: [:edit, :destroy, :update]
   # GET /obituaries
   # GET /obituaries.json
   def index
@@ -30,6 +31,7 @@ class ObituariesController < ApplicationController
   # POST /obituaries.json
   def create
     @obituary = Obituary.new(obituary_params)
+    @obituary.user_id = current_user.id
 
     respond_to do |format|
       if @obituary.save
@@ -75,5 +77,11 @@ class ObituariesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def obituary_params
       params.require(:obituary).permit(:name, :birth_date, :death_date, :content, obituary_images_attributes: [ :_destroy, :id, :image] )
+    end
+
+    def redirect_bad_user
+      unless @obituary.user_id == current_user.id
+        redirect_to :root
+      end
     end
 end
